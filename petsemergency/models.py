@@ -11,8 +11,6 @@ class MyUser(models.Model):
     password = models.CharField(max_length=20)
     province = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    image = models.URLField(
-        default='https://pic3.zhimg.com/80/v2-acd060b9f86eb0b988c8d1d6b242fd3d_1440w.jpg')
     personality = models.TextField(max_length=200, default="这个人很懒哦，什么都没写ฅ(๑ ̀ㅅ ́๑)ฅ")
 
     def __str__(self):

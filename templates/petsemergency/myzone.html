@@ -1,0 +1,63 @@
+{% extends "petsemergency/base.html" %}
+{% load static %}
+{% block title %}个人主页{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+  <header class="blog-header py-3"></header>
+  <div class="nav-scroller py-1 mb-2"></div>
+  <body class="bg-light">
+    <div class="container">
+
+  <div class="row">
+    <div class="col-md-4 order-md-1 mb-4">
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">我的资料</h6>
+            <small class="text-muted">About me</small>
+          </div>
+          <a href="{% url 'myzone_aboutme' %}">
+              <i class="mdui-icon material-icons">filter_1</i>
+        </a></li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">我的宠物</h6>
+            <small class="text-muted">My honey</small>
+          </div>
+            <a href="{% url 'myzone_mypets' %}"><i class="mdui-icon material-icons">filter_2</i></a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">我的求助</h6>
+            <small class="text-muted">My help</small>
+          </div>
+            <i class="mdui-icon material-icons">filter_3</i>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">我的帮助</h6>
+            <small class="text-muted">Help other</small>
+          </div>
+            <i class="mdui-icon material-icons">filter_4</i>
+        </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">我的聊天</h6>
+            <small class="text-muted">My chat</small>
+          </div>
+              <i class="mdui-icon material-icons">filter_5</i>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-md-8 order-md-2">
+        {% block myzone %}{% endblock %}
+    </div>
+  </div>
+    </div>
+</body>
+  </div>
+{% endblock %}

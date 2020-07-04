@@ -12,22 +12,48 @@ from petsemergency.models import MyUser
 
 
 def index(request):
-    user = request.user if request.user.is_authenticated else None
     content = {
     }
     return render(request, 'petsemergency/WelcomePage.html', content)
 
 
 def blog(request):
-    user = request.user if request.user.is_authenticated else None
     content = {
     }
     return render(request, 'petsemergency/blog.html', content)
 
 
 def news(request):
-    user = request.user if request.user.is_authenticated else None
     content = {
     }
     return render(request, 'petsemergency/news.html', content)
 
+
+def signup(request):
+    content = {
+    }
+    return render(request, 'petsemergency/signup.html', content)
+
+
+def signin(request):
+    content = {
+    }
+    return render(request, 'petsemergency/signin.html', content)
+
+
+def myzone(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone.html', content)
+
+
+def aboutme(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone_aboutme.html', content)
+
+
+def mypets(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone_mypets.html', content)
