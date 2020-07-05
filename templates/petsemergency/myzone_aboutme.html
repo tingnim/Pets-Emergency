@@ -4,20 +4,17 @@
 {% block myzone %}
     <body>
   <form class="form-signin">
-
           <div class="mb-3">
               <img class="mdui-img-circle mdui-center" src="{% static '2.jpg' %}" width="220px" height="220px"/>
           </div>
       <div class="row">
-
-
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" readonly>
+            <input type="text" class="form-control" id="firstName" placeholder="{{ user.myuser.firstname }}" value="" readonly>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" readonly>
+            <input type="text" class="form-control" id="lastName" placeholder="{{ user.myuser.lastname }}" value="" readonly>
           </div>
         </div>
 
@@ -27,7 +24,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">@</span>
             </div>
-            <input type="text" class="form-control" id="username" placeholder="Username" readonly>
+            <input type="text" class="form-control" id="username" placeholder="{{ user.username }}" readonly>
             <div class="invalid-feedback" style="width: 100%;">
               Your username is required.
             </div>
@@ -36,7 +33,7 @@
 
       <div class="mb-3">
           <label for="username">personalized signature</label>
-            <input type="text" class="form-control" id="username" placeholder="Username" readonly>
+            <input type="text" class="form-control" id="username" placeholder="{{ user.myuser.personality }}" readonly>
             <div class="invalid-feedback" style="width: 100%;">
               Your username is required.
             </div>
@@ -44,7 +41,7 @@
 
         <div class="mb-3">
           <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" readonly>
+          <input type="email" class="form-control" id="email" placeholder="{{ user.myuser.email }}" readonly>
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -53,7 +50,7 @@
 
       <div class="mb-3">
           <label for="repassword">City </label>
-          <input type="text" class="form-control" id="city" readonly>
+          <input type="text" class="form-control" id="city" placeholder="{{ user.myuser.city }}" readonly>
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>

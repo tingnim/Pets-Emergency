@@ -31,10 +31,22 @@
                 <div class="mdui-col-xs-6 mdui-col-sm-4"></div>
                 <div class="mdui-col-xs-6 mdui-col-sm-5"></div>
                 <div class="mdui-col-xs-6 mdui-col-sm-3">
-                    <div class="mdui-textfield  search-input">
-                        <i class="mdui-icon material-icons">search</i>
-                        <input class="mdui-textfield-input" placeholder="search"/>
-                    </div>
+                    {% if user %}
+                        <div class="mdui-col-xs-10">
+                            <div class="mdui-textfield  search-input">
+                                <i class="mdui-icon material-icons">search</i>
+                                <input class="mdui-textfield-input" placeholder="search"/>
+                            </div>
+                        </div>
+                        <div class="mdui-col-xs-2">
+                            <a href="{% url 'logout' %}"> <i class="mdui-icon material-icons">exit_to_app</i></a>
+                        </div>
+                    {% else %}
+                        <div class="mdui-textfield  search-input">
+                            <i class="mdui-icon material-icons">search</i>
+                            <input class="mdui-textfield-input" placeholder="search"/>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

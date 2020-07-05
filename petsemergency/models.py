@@ -7,10 +7,12 @@ from datetime import datetime
 # Create your models here.
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=20)
+    firstname = models.CharField(max_length=5)
+    lastname = models.CharField(max_length=5)
+    username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
-    province = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
+    email = models.EmailField(default="xxx@email.com")
     personality = models.TextField(max_length=200, default="这个人很懒哦，什么都没写ฅ(๑ ̀ㅅ ́๑)ฅ")
 
     def __str__(self):

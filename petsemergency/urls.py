@@ -17,4 +17,5 @@ urlpatterns = [
     path('myzone/myhelp', views.myhelp, name='myzone_myhelp'),
     path('myzone/helpother', views.myhelp, name='myzone_helpother'),
     path('myzone/mying', views.mying, name='myzone_mying'),
+    path('logout/', views.logout, name='logout'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
