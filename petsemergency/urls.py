@@ -14,4 +14,7 @@ urlpatterns = [
     path('myzone/', views.myzone, name='myzone'),
     path('myzone/aboutme', views.aboutme, name='myzone_aboutme'),
     path('myzone/mypets', views.mypets, name='myzone_mypets'),
+    path('myzone/myhelp', views.myhelp, name='myzone_myhelp'),
+    path('myzone/helpother', views.myhelp, name='myzone_helpother'),
+    path('myzone/mying', views.mying, name='myzone_mying'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

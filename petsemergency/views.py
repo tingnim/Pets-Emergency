@@ -57,3 +57,21 @@ def mypets(request):
     content = {
     }
     return render(request, 'petsemergency/myzone_mypets.html', content)
+
+
+def myhelp(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone_myhelp.html', content)
+
+
+def helpother(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone_helpother.html', content)
+
+
+def mying(request):
+    content = {
+    }
+    return render(request, 'petsemergency/myzone_mying.html', content)
