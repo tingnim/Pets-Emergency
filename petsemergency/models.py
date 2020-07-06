@@ -24,7 +24,7 @@ class Message(models.Model):
     title = models.CharField(max_length=100)
     type = models.CharField(max_length=10, default=None)
     date = models.DateTimeField(default=datetime.now)
-    content = models.TextField(max_length=2000)
+    content = models.TextField(max_length=300)
 
     def __str__(self):
         return self.title
