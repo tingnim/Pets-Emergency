@@ -51,10 +51,19 @@
             </div>
         </div>
     </div>
-    <div class="mdui-tab mdui-tab-centered" mdui-tab>
-        <a href="{% url 'blog' %}" class="mdui-ripple mdui-ripple-white">广场</a>
-        <a href="{% url 'news' %}" class="mdui-ripple mdui-ripple-white">新闻</a>
-        <a href="{% url 'myzone' %}" class="mdui-ripple mdui-ripple-white">我的</a>
+    <div class="mdui-tab mdui-tab-centered" id="tab" mdui-tab>
+	<a href="{% url 'blog' %}" id="tab1" class="mdui-ripple">
+	    <i class="mdui-icon material-icons">&#xe614;</i>
+	    <label>广场</label>
+	</a>
+	<a href="{% url 'news' %}" id="tab2" class="mdui-ripple">
+	    <i class="mdui-icon material-icons">&#xe8d3;</i>
+	    <label>新闻</label>
+	</a>
+	<a href="{% url 'myzone' %}" id=tab3 class="mdui-ripple">
+	    <i class="mdui-icon material-icons">&#xe7f2;</i>
+	    <label>我的</label>
+	</a>
     </div>
 </div>
 
