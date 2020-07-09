@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth
 
-from petsemergency.models import MyUser
+from petsemergency.models import *
 
 
 # Create your views here.
@@ -21,7 +21,30 @@ def index(request):
 
 
 def blog(request):
+    user = request.user if request.user.is_authenticated else None
+    if request.method == 'POST':
+        message = request.POST.get('con', '')
+        title = request.POST.get('title', '')
+        type = message[0:2]
+        if type == "jl":
+            new_mess = Message(user=user.username,
+                               title=title,
+                           type="交流",
+                           content=message[2:])
+        else:
+            new_mess = Message(user=user.username,
+                               title=title,
+                           type="求助",
+                           content=message[2:])
+        new_mess.save()
+
+    com = Message.objects.filter(type="交流")
+    help = Message.objects.filter(type="求助")
+
     content = {
+        'user': user,
+        'com': com,
+        'help': help
     }
     return render(request, 'petsemergency/blog.html', content)
 
@@ -111,7 +134,17 @@ def aboutme(request):
 
 
 def mypets(request):
+    state = None
+    user = request.user if request.user.is_authenticated else None
+    pet = Pets.objects.filter(owner=user.username)
+    if pet is None:
+        state = 'none'
+    else:
+        state = 'have'
     content = {
+        'user': user,
+        'state': state,
+        'pet': pet
     }
     return render(request, 'petsemergency/myzone_mypets.html', content)
 
@@ -132,3 +165,22 @@ def mying(request):
     content = {
     }
     return render(request, 'petsemergency/myzone_mying.html', content)
+
+
+def messagedetail(request):
+    user = request.user if request.user.is_authenticated else None
+    title = request.GET.get('title')
+    con = Message.objects.filter(title=title)
+    comment = request.POST.get('comment')
+    if comment is not None:
+        commuser = request.GET.get('commuser')
+        new_comm = Comment(user=user.username,
+                           comment=comment,
+                           commentuser=commuser)
+        new_comm.save()
+    all_comm = Comment.objects.all()
+    content = {
+        'user': user,
+        'content': con[0]
+    }
+    return render(request, 'petsemergency/messagedetail.html', content)

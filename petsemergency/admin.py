@@ -14,11 +14,11 @@ class UserAdmin(BaseUserAdmin):
 
 
 class Message_admin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'user', 'type')
+    list_display = ('date', 'user', 'type')
     list_per_page = 20
     ordering = ('date',)
     list_filter = ('user', 'type',)
-    search_fields = ('title', 'user',)
+    search_fields = ('user',)
 
 
 class Comment_admin(admin.ModelAdmin):

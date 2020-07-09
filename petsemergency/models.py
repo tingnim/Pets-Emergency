@@ -20,26 +20,26 @@ class MyUser(models.Model):
 
 
 class Message(models.Model):
-    user = models.ForeignKey('MyUser', on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    user = models.CharField(max_length=20)
+    title = models.CharField(max_length=50, default="我是题目")
     type = models.CharField(max_length=10, default=None)
     date = models.DateTimeField(default=datetime.now)
-    content = models.TextField(max_length=300)
+    content = models.TextField(max_length=1000)
 
     def __str__(self):
         return self.title
 
 
 class Comment(models.Model):
-    user = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Comment_user')
-    commentuser = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Comment_commentuser')
+    user = models.CharField(max_length=20)
+    commentuser = models.CharField(max_length=20)
     comment = models.ForeignKey('Message', on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now)
 
 
 class ChatRecord(models.Model):
-    curruser = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Char_curr')
-    other = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Chat_other')
+    curruser = models.CharField(max_length=20)
+    other = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now)
     summary = models.TextField(max_length=2000)
 
@@ -47,12 +47,12 @@ class ChatRecord(models.Model):
 class Pets(models.Model):
     petname = models.CharField(max_length=20)
     petid = models.CharField(max_length=20, unique=True, primary_key=True)
-    owner = models.ForeignKey('MyUser', on_delete=models.CASCADE)
+    owner = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now)
     type = models.CharField(max_length=20, default="小可爱")
 
 
 class Help(models.Model):
-    user = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Help_user')
-    helper = models.ForeignKey('MyUser', on_delete=models.CASCADE, related_name='Help_helper')
+    user = models.CharField(max_length=20)
+    helper = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now)
