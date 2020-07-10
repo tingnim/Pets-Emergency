@@ -29,13 +29,13 @@ def blog(request):
         if type == "jl":
             new_mess = Message(user=user.username,
                                title=title,
-                           type="交流",
-                           content=message[2:])
+                               type="交流",
+                               content=message[2:])
         else:
             new_mess = Message(user=user.username,
                                title=title,
-                           type="求助",
-                           content=message[2:])
+                               type="求助",
+                               content=message[2:])
         new_mess.save()
 
     com = Message.objects.filter(type="交流")
@@ -137,7 +137,7 @@ def mypets(request):
     state = None
     user = request.user if request.user.is_authenticated else None
     pet = Pets.objects.filter(owner=user.username)
-    if pet is None:
+    if pet.count() == 0:
         state = 'none'
     else:
         state = 'have'
@@ -150,13 +150,33 @@ def mypets(request):
 
 
 def myhelp(request):
+    state = None
+    user = request.user if request.user.is_authenticated else None
+    help = Message.objects.filter(type="求助", user=user.username)
+    if help.count() == 0:
+        state = 'none'
+    else:
+        state = 'have'
     content = {
+        'user': user,
+        'state': state,
+        'help': help
     }
     return render(request, 'petsemergency/myzone_myhelp.html', content)
 
 
 def helpother(request):
+    state = None
+    user = request.user if request.user.is_authenticated else None
+    help = Help.objects.filter(helper=user.username)
+    if help.count() == 0:
+        state = 'none'
+    else:
+        state = 'have'
     content = {
+        'user': user,
+        'state': state,
+        'help': help
     }
     return render(request, 'petsemergency/myzone_helpother.html', content)
 
@@ -172,15 +192,57 @@ def messagedetail(request):
     title = request.GET.get('title')
     con = Message.objects.filter(title=title)
     comment = request.POST.get('comment')
+    helpcomment = request.POST.get('helpcomment')
+    state = None
+    if con.count() != 0 and user.username == con[0].user:
+        state = 'isme'
+    else:
+        state = 'notme'
     if comment is not None:
-        commuser = request.GET.get('commuser')
         new_comm = Comment(user=user.username,
                            comment=comment,
-                           commentuser=commuser)
+                           title=title,
+                           commentuser=con[0].user)
         new_comm.save()
-    all_comm = Comment.objects.all()
+    if con.count() != 0:
+        all_comm = Comment.objects.filter(commentuser=con[0].user, title=title)
+    if helpcomment is not None:
+        if Wanttohelp.objects.filter(user=user.username, wantuser=user.username, title=title).count() != 0:
+            state = 'help_again'
+        new_want = Wanttohelp(
+            user=user.username,
+            wantuser=con[0].user,
+            say=helpcomment,
+            title=title
+        )
+        new_want.save()
+    want_people = Wanttohelp.objects.filter(wantuser=user.username, title=title)
     content = {
         'user': user,
-        'content': con[0]
+        'content': con[0],
+        'all_comm': all_comm,
+        'state': state,
+        'want_people': want_people
     }
     return render(request, 'petsemergency/messagedetail.html', content)
+
+
+def addpets(request):
+    user = request.user if request.user.is_authenticated else None
+    if request.method == 'POST':
+        petname = request.POST.get('petname', '')
+        type = request.POST.get('type', '')
+        petcontent = request.POST.get('con', '')
+        new_pet = Pets.objects.create(
+            petname=petname,
+            type=type,
+            pcontent=petcontent,
+            owner=user.username,
+        )
+        new_pet.save()
+
+    content = {
+        'active_menu': 'myzone_mypets',
+        'user': user,
+    }
+    return render(request, 'petsemergency/myzone_addpets.html', content)

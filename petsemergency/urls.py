@@ -19,4 +19,5 @@ urlpatterns = [
     path('myzone/mying', views.mying, name='myzone_mying'),
     path('logout/', views.logout, name='logout'),
     path('messagedetail/', views.messagedetail, name='messagedetail'),
+    path('myzone/mypets/addpets', views.addpets, name='addpets'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

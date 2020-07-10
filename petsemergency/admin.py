@@ -27,18 +27,9 @@ class Comment_admin(admin.ModelAdmin):
     ordering = ('date',)
     list_filter = ('user', 'commentuser',)
 
-
-class ChatRecord_admin(admin.ModelAdmin):
-    list_display = ('curruser', 'other', 'date')
+class MyPets_admin(admin.ModelAdmin):
+    list_display = ('petname', 'type', 'owner')
     list_per_page = 20
-    ordering = ('date',)
-    list_filter = ('curruser', 'other',)
-
-
-class Pets_admin(admin.ModelAdmin):
-    list_display = ('petid', 'petname', 'type', 'owner', 'date')
-    list_per_page = 20
-    ordering = ('date',)
     list_filter = ('owner', 'type')
 
 
@@ -57,6 +48,5 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Message, Message_admin)
 admin.site.register(Comment, Comment_admin)
 admin.site.register(MyUser)
-admin.site.register(ChatRecord, ChatRecord_admin)
-admin.site.register(Pets, Pets_admin)
+admin.site.register(Pets, MyPets_admin)
 admin.site.register(Help, Help_admin)

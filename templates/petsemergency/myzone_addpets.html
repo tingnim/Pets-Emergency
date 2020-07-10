@@ -1,0 +1,160 @@
+{% extends "petsemergency/myzone.html" %}
+{% load static %}
+
+{% block myzone %}
+    <style>
+        .form-signup {
+            width: 100%;
+            max-width: 420px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-label-group > input,
+        .form-label-group > label {
+            height: 3.125rem;
+            padding: .75rem;
+        }
+
+        .form-label-group > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            margin-bottom: 0; /* Override default `<label>` margin */
+            line-height: 1.5;
+            color: #495057;
+            pointer-events: none;
+            cursor: text; /* Match the input under the label */
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            transition: all .1s ease-in-out;
+        }
+
+        .form-label-group input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-moz-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:not(:placeholder-shown) {
+            padding-top: 1.25rem;
+            padding-bottom: .25rem;
+        }
+
+        .form-label-group input:not(:placeholder-shown) ~ label {
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+            font-size: 12px;
+            color: #777;
+        }
+        @supports (-ms-ime-align: auto) {
+            .form-label-group > label {
+                display: none;
+            }
+            .form-label-group input::-ms-input-placeholder {
+                color: #777;
+            }
+        }
+
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            .form-label-group > label {
+                display: none;
+            }
+            .form-label-group input:-ms-input-placeholder {
+                color: #777;
+            }
+        }
+    </style>
+
+  <div class="container">
+      <link href="{% static 'css/city-picker.css' %}" rel="stylesheet" type="text/css" />
+      <script src="{% static 'js/jquery.js' %}"></script>
+      <script src="{% static 'js/bootstrap.js' %}"></script>
+      <script src="{% static 'js/city-picker.data.js' %}"></script>
+      <script src="{% static 'js/city-picker.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
+
+      <form class="form-signup" method="POST">
+          {% csrf_token %}
+
+          <div class="row">
+          <div class="mb-3">
+              <label for="username">Pet name</label>
+              <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                  </div>
+                  <input type="text" required name="petname" class="form-control" id="petname" placeholder="petname" required>
+                  <div class="invalid-feedback" style="width: 100%;">Pet username is required.</div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="username">Pet type</label>
+              <div class="input-group">
+                  <input type="text" required name="type" class="form-control" id="type" placeholder="type" required>
+                  <div class="invalid-feedback" style="width: 100%;">Pet username is required.</div>
+              </div>
+          </div>
+
+              <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+		<!-- 引入wangEditor插件 -->
+		<script type="text/javascript" src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+
+  <div class="nav-scroller py-1 mb-2">
+  </div>
+			<div id="contentDiv" style="width: 1100px;"></div>
+			<textarea name="content" id="content" style="display:none" ></textarea>
+            <input type="hidden" required name="con" id="editortxt">
+              <div class="nav-scroller py-1 mb-2"></div>
+               <div class="row">
+               </div>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn">Add</button>
+      </form>
+      </body>
+
+              <script>
+
+		var E = window.wangEditor;
+		E.width = 200;
+		var editor = new E('#contentDiv')
+		var $text1 = $('#content');
+		editor.customConfig.onchange = function (html) {
+			// 监控变化，同步更新富文本内容到 textarea
+			$text1.val(html);
+		}
+		editor.customConfig.uploadImgShowBase64 = true
+        editor.customConfig.uploadImgMaxLength = 4
+		editor.create();
+		$text1.val(editor.txt.html());
+
+		document.getElementById('btn').addEventListener('click', function () {
+        // 读取 html
+        var editor_txt=editor.txt.html();
+        document.getElementById('editortxt').value=editor_txt;
+    }, false);
+		//获取内容
+	</script>
+  </div>
+{% endblock %}

@@ -33,26 +33,27 @@ class Message(models.Model):
 class Comment(models.Model):
     user = models.CharField(max_length=20)
     commentuser = models.CharField(max_length=20)
-    comment = models.ForeignKey('Message', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default="")
+    comment = models.TextField(max_length=150)
     date = models.DateTimeField(default=datetime.now)
 
 
-class ChatRecord(models.Model):
-    curruser = models.CharField(max_length=20)
-    other = models.CharField(max_length=20)
-    date = models.DateTimeField(default=datetime.now)
-    summary = models.TextField(max_length=2000)
-
-
-class Pets(models.Model):
-    petname = models.CharField(max_length=20)
-    petid = models.CharField(max_length=20, unique=True, primary_key=True)
-    owner = models.CharField(max_length=20)
-    date = models.DateTimeField(default=datetime.now)
-    type = models.CharField(max_length=20, default="小可爱")
+class Wanttohelp(models.Model):
+    user = models.CharField(max_length=20)
+    wantuser = models.CharField(max_length=20)
+    say = models.CharField(max_length=100, default="")
+    title = models.CharField(max_length=100, default="")
 
 
 class Help(models.Model):
     user = models.CharField(max_length=20)
     helper = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now)
+
+
+class Pets(models.Model):
+    petid = models.IntegerField(auto_created=True, default=1, primary_key=True)
+    petname = models.CharField(max_length=20)
+    pcontent = models.TextField(max_length=1000)
+    owner = models.CharField(max_length=20)
+    type = models.CharField(max_length=20, default="小可爱")

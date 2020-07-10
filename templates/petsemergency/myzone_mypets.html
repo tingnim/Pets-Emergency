@@ -3,7 +3,22 @@
 
 {% block myzone %}
     <body>
-    <div class="card mb-3" style="max-width: 540px;">
+    {% if state == 'none' %}
+      <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-1 pt-1">
+      </div>
+      <div class="col-10 text-center">
+        <h3 class="blog-header-logo text-dark" href="#">还没有宠物哦，快去添加一个吧</h3>
+      </div>
+      <div class="col-1 d-flex justify-content-end align-items-center">
+        <a class="text-muted" href="#" aria-label="Search">
+        </a>
+      </div>
+    </div>
+  </header>
+      {% elif state == 'have' %}
+            <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
       <img src="..." class="card-img" alt="...">
@@ -17,5 +32,18 @@
     </div>
   </div>
 </div>
+    {%  endif %}
+
+  <div class="row mb-2">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    <a href="{% url 'addpets' %}"><button class="btn btn-outline-primary" type="submit">Add a sweet pet</button></a>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+
+
 </body>
 {% endblock %}

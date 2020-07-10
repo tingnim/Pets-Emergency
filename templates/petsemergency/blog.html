@@ -11,6 +11,9 @@
   <div class="nav-scroller py-1 mb-2">
   </div>
       <style>
+		.container{
+			padding-top: 30px;
+		}
 		/*设置编辑框高度*/
 		.w-e-text-container{
 			height: 100px !important;
@@ -46,6 +49,7 @@
                </div>
 		</form>
                 <script>
+
 		var E = window.wangEditor;
 		E.width = 1400;
 		var editor = new E('#contentDiv')
@@ -54,6 +58,8 @@
 			// 监控变化，同步更新富文本内容到 textarea
 			$text1.val(html);
 		}
+		editor.customConfig.uploadImgShowBase64 = true
+        editor.customConfig.uploadImgMaxLength = 4
 		editor.create();
 		$text1.val(editor.txt.html());
 
@@ -82,7 +88,7 @@
           <a href="{% url 'messagedetail' %}?title={{ c.title }}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/></svg>
         </div>
       </div>
     </div>
@@ -97,7 +103,7 @@
           <a href="{% url 'messagedetail' %}?title={{ h.title }}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/></svg>
         </div>
       </div>
     </div>
