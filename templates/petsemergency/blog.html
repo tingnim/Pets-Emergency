@@ -3,7 +3,7 @@
 {% block title %}广场{% endblock %}
 
 {% block content %}
-
+<title>Blog</title>
   <div class="container">
   <header class="blog-header py-3">
   </header>
@@ -35,7 +35,102 @@
 			<div id="contentDiv" style="width: 1100px;"></div>
 			<textarea name="content" id="content" style="display:none" ></textarea>
             <input type="hidden" required name="con" id="editortxt">
+
+
+
               <div class="nav-scroller py-1 mb-2"></div>
+
+<link rel="canonical" href="https://letswrite.tw/google-map-api-place-api/">
+<div id="app" class="container">
+
+      <!-- 搜尋框 -->
+      <div class="row">
+        <div class="col google-map">
+          <h5>Address</h5>
+          <div class="form-group">
+            <input type="text" class="form-control" ref="site" v-model="site">
+          </div>
+        </div>
+      </div>
+
+      <!-- 放google map的div -->
+      <div class="row">
+        <div class="col google-map">
+          <div id="map" class="embed-responsive embed-responsive-16by9"></div>
+        </div>
+      </div>
+</div>
+
+    <!-- 將 YOUR_API_KEY 替換成你的 API Key 即可 -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW4jsPlNKgv6jFm3B5Edp5ywgdqLWdmc&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+    <!-- map -->
+    <script>
+      const googleMap = new Vue({
+        el: '#app',
+        data: {
+          map: null,
+          autocomplete: null,
+          site: '', // place API要綁定的搜尋框
+          place: null // 存place確定後回傳的資料
+        },
+        methods: {
+          // init google map
+          initMap() {
+
+            let location = {
+              lat: 39.9,
+              lng: 116.3
+            };
+
+            this.map = new google.maps.Map(document.getElementById('map'), {
+              center: location,
+              zoom: 10
+            });
+          },
+          // 地址自動完成 + 地圖的中心移到輸入結果的地址上
+          siteAuto() {
+
+            let options = {
+              componentRestrictions: { country: 'cn' } // 限制在中国範圍
+            };
+            this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
+            this.autocomplete.addListener('place_changed', () => {
+              this.place = this.autocomplete.getPlace();
+              if(this.place.geometry) {
+                let searchCenter = this.place.geometry.location;
+                this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
+
+                // 放置標記
+                let marker = new google.maps.Marker({
+                  position: searchCenter,
+                  map: this.map
+                });
+
+                // info window
+                let infowindow = new google.maps.InfoWindow({
+                  content: this.place.formatted_address
+                });
+                infowindow.open(this.map, marker);
+
+              }
+            });
+          }
+        },
+        mounted() {
+          window.addEventListener('load', () => {
+
+            this.initMap();
+            this.siteAuto();
+
+          });
+        }
+      })
+    </script>
+
+ <div class="nav-scroller py-1 mb-2"></div>
+
                <div class="row">
           <div class="col-md-3 mb-3"></div>
           <div class="col-md-3 mb-3">
